@@ -1,0 +1,235 @@
+{
+  "responses": {    
+    "UnauthorizedResponse": {
+      "description": "Returned after making request with invalid credentials",
+      "content": {
+        "application/json": {
+          "schema": {
+            "example": {
+              "errors": {
+                "detail": [
+                  "Authentication credentials were not provided"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "SuccessfulSignInResponse": {
+      "description": "Successful sign in",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "description": "Successful authentication response body",
+            "properties": {
+              "user": {
+                "$ref": "#components/schemas/User"
+              },
+              "token": {
+                "$ref": "#components/schemas/Token"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Catalog":{
+      "description": "Page of All Products",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "description": "Page of All Products",
+            "properties": {
+              "count": {
+                "type":"integer",
+                "example":"2"},
+              "next":{
+                "type":"string",
+                "example":"null"},
+              "previous": {
+                "type":"string",
+                "example":"null"},
+              "results": {
+                "type": "array",
+                "items": {"$ref": "#components/schemas/QuerySetsProducts"}
+              }         
+            }
+          }
+        }
+      }
+    }                             
+  },
+
+  "requestBodies": {
+    "AuthRequestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "identity": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            }
+          },
+          "examples": {
+            "test@user.com": {
+              "summary": "An example of a user",
+              "value": {
+                "identity": "admin",
+                "password": "admin"
+              }
+            }
+          }
+        }
+      }
+    },
+    "IdProductRequestBody": {
+      "content": {
+        "multipart/form-data": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "id_product": {
+                "type": "integer",
+                "example": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "schemas": {
+    "Token": {
+      "description": "Token model",
+      "type": "object",
+      "required": [
+        "token"
+      ],
+      "properties": {
+        "token": {
+          "type": "string",
+          "example": "Bearer <token>"
+        }
+      }
+    },
+
+    "User": {
+      "description": "User model",
+      "type": "object",
+      "required": [
+        "email",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": "123"
+        },
+        "email": {
+          "type": "string",
+          "example": "test@user.com"
+        },
+        "first_name": {
+          "type": "string",
+          "example": "Jack"
+        },
+        "last_name": {
+          "type": "string",
+          "example": "London"
+        },
+        "status": {
+          "type": "string",
+          "example": "active"
+        }
+      }
+    },
+
+    "QuerySetsProducts": {
+      "anyOf":[
+        {
+          "type": "array",
+          "$ref": "#components/schemas/Products"
+          },
+        {
+          "type": "array",
+          "$ref": "#components/schemas/Products"
+        }
+      ]
+    },
+
+    "Products": {
+      "description": "Products model",
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": "206021772"
+        },
+        "name_product": {
+          "type": "string",
+          "example": "Пылесос"
+        },
+        "type_product": {
+          "type": "string",
+          "example": "Пылесос"
+        },
+        "root_type_product": {
+          "type": "string",
+          "example": "Пылесосы"
+        },
+        "vendor_code": {
+          "type": "string",
+          "example": "1.198-051.0"
+        },
+        "description": {
+          "type": "string",
+          "example": "Обновленная версия VC 3 Premium "
+        },
+        "color": {
+          "type": "string",
+          "example": "белый"
+        },
+        "contents": {
+          "type": "string",
+          "example": "всасывающий шланг: 1.5 м;"
+        },
+        "brand_name": {
+          "type": "string",
+          "example": "Обновленная версия VC 3 Premium"
+        },
+        "price_without_nds": {
+          "type": "integer",
+          "example": 12961
+        },
+        "price": {
+          "type": "integer",
+          "example": 15979
+        },
+        "options": {
+          "type": "integer",
+          "example": "Основная информация: Цвет"
+        }        
+      }
+    }
+  },
+  "securitySchemes": {
+    "BearerScheme": {
+      "type": "http",
+      "description": "Enter your JWT token",
+      "scheme": "bearer",
+      "bearerFormat": "Bearer"
+    }
+  }
+}

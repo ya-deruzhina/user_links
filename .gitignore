@@ -1,0 +1,21 @@
+# IDEs
+.vscode
+.idea
+
+# environment variables
+.env
+
+# celery beat schedule file
+celerybeat-schedule
+
+### Python ###
+__pycache__/
+*.pyc
+
+# DB dumps
+*.sql
+dump_data.json
+dump.rdb
+.DS_Store
+
+settings.py

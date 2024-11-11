@@ -1,0 +1,34 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "==5.0"
+django-cors-headers = "*"
+django-extensions = "*"
+django-filter = "*"
+djangorestframework = "*"
+djangorestframework-jwt = "*"
+ipython = "*"
+psycopg2-binary = "*"
+python-dotenv = "*"
+loguru = "*"
+gunicorn = "*"
+drf-spectacular = "*"
+requests="*"
+
+[dev-packages]
+pre-commit = "*"
+flake8 = "*"
+
+[requires]
+python_version = "3.12"
+
+[scripts]
+server = "python manage.py runserver"
+shell = "python manage.py shell_plus"
+seed = "python scripts/run_seeds.py"
+migrate = "python manage.py migrate"
+auto_migration = "python manage.py makemigrations"
+script = "python scripts/run_script.py"

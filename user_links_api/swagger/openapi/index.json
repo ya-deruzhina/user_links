@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.3",
+
+    "info": {
+      "title": "Django REST Backend API",
+      "description": "This document provides use cases for User Links Backend API",
+      "version": "0.0.1"
+    },
+
+    "servers": [
+      {
+        "url": "http://127.0.0.1:8000/",
+        "description": "Development server, API v.1"
+      }
+    ],
+
+    "tags": [
+      {
+        "name": "User",
+        "description": "User related endpoints"
+      },
+      {
+        "name": "Links",
+        "description": "Links related endpoints"
+      }
+    ],
+
+    "components": {},
+    "paths": {},
+    "security": [{
+      "BearerScheme": []
+    }]
+  }

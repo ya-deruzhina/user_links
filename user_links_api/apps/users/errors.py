@@ -1,0 +1,5 @@
+INVALID_CREDENTIALS_ERROR = 'invalid_credentials'
+INVALID_CREDENTIALS_BLOCKED_ERROR = 'invalid_credentials_blocked'
+INVALID_INVITATION_TOKEN_ERROR = 'invalid_invitation_token'
+EMAIL_TAKEN_ERROR = 'email_taken'
+SOMETHING_WENT_WRONG_ERROR = 'something_went_wrong'
