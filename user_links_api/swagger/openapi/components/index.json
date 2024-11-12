@@ -34,7 +34,34 @@
           }
         }
       }
-    }               
+    },
+    "Collections":{
+      "description": "Page of All Collections",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "description": "Page of All Collections",
+            "properties": {
+              "count": {
+                "type":"integer",
+                "example":"2"},
+              "next":{
+                "type":"string",
+                "example":"null"},
+              "previous": {
+                "type":"string",
+                "example":"null"},
+              "results": {
+                "type": "array",
+                "items": {"$ref": "#components/schemas/QuerySetsCollections"}
+              }         
+            }
+          }
+        }
+      }
+    }            
+
   },
 
   "requestBodies": {
@@ -139,6 +166,48 @@
           }
         }
       }
+    },
+    "CollectionRequestBody": {
+      "content": {
+        "multipart/form-data": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "First"
+              },
+              "short_description": {
+                "type": "string",
+                "example": "Very Interesting"
+              },
+              "owner": {
+                "type": "integer",
+                "example": "1"
+              }
+            }
+          }
+        }
+      }
+    },
+    "CollectionUpdateRequestBody": {
+      "content": {
+        "multipart/form-data": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": ""
+              },
+              "short_description": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          }
+        }
+      }
     }
   },
 
@@ -193,21 +262,21 @@
       }
     },
 
-    "QuerySetsProducts": {
+    "QuerySetsCollections": {
       "anyOf":[
         {
           "type": "array",
-          "$ref": "#components/schemas/Products"
+          "$ref": "#components/schemas/Collection"
           },
         {
           "type": "array",
-          "$ref": "#components/schemas/Products"
+          "$ref": "#components/schemas/Collection"
         }
       ]
     },
 
-    "Products": {
-      "description": "Products model",
+    "Collection": {
+      "description": "Collection model",
       "type": "object",
       "required": [
         "id"
@@ -215,51 +284,27 @@
       "properties": {
         "id": {
           "type": "integer",
-          "example": "206021772"
+          "example": "1"
         },
-        "name_product": {
+        "name": {
           "type": "string",
-          "example": "Пылесос"
+          "example": "New"
         },
-        "type_product": {
+        "short_description": {
           "type": "string",
-          "example": "Пылесос"
+          "example": "Very Interesting"
         },
-        "root_type_product": {
+        "created_at": {
           "type": "string",
-          "example": "Пылесосы"
+          "example": "11-11-2024 12:00"
         },
-        "vendor_code": {
+        "updated_at": {
           "type": "string",
-          "example": "1.198-051.0"
+          "example": "11-11-2024 12:00"
         },
-        "description": {
+        "owner": {
           "type": "string",
-          "example": "Обновленная версия VC 3 Premium "
-        },
-        "color": {
-          "type": "string",
-          "example": "белый"
-        },
-        "contents": {
-          "type": "string",
-          "example": "всасывающий шланг: 1.5 м;"
-        },
-        "brand_name": {
-          "type": "string",
-          "example": "Обновленная версия VC 3 Premium"
-        },
-        "price_without_nds": {
-          "type": "integer",
-          "example": 12961
-        },
-        "price": {
-          "type": "integer",
-          "example": 15979
-        },
-        "options": {
-          "type": "integer",
-          "example": "Основная информация: Цвет"
+          "example": "User"
         }        
       }
     }

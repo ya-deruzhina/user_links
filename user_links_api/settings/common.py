@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_jwt',
 
-    # # Project apps
+    # Project apps
     'apps.users',
-    # 'apps.links',
+    'apps.collections',
     'user_links_api',
 ]
 

@@ -20,8 +20,8 @@
         "description": "User related endpoints"
       },
       {
-        "name": "Links",
-        "description": "Links related endpoints"
+        "name": "Collections",
+        "description": "Collections related endpoints"
       }
     ],
 

@@ -1,0 +1,16 @@
+{
+    "/api/v1/collections/list/": {
+        "get": {
+            "description": "Show all Collections by user",
+            "tags": [
+                "Collections"
+            ],
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/Collections"
+                }
+            }
+        }
+    }
+
+}
