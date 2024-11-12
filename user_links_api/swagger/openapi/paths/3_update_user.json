@@ -1,0 +1,56 @@
+{
+    "/api/v1/users/update/": {
+        "post": {
+            "description": "Update user information",
+            "tags": [
+                "User"
+            ],
+            "requestBody": {
+                "$ref": "#/components/requestBodies/UpdateUserRequestBody"
+            },
+            "responses": {
+                "200": {
+                    "$ref": "#components/schemas/User"
+                },
+                "400": {
+                    "description": "Returned when request body is not valid",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "errors": {
+                                        "type": "object",
+                                        "example": {
+                                            "password": [
+                                                "This field may not be blank."
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "Returned after sending invalid set of credentials",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "errors": {
+                                        "type": "object",
+                                        "example": {
+                                            "non_field_errors": [
+                                                "invalid_credentials"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

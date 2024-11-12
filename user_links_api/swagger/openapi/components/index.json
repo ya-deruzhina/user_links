@@ -34,33 +34,7 @@
           }
         }
       }
-    },
-    "Catalog":{
-      "description": "Page of All Products",
-      "content": {
-        "application/json": {
-          "schema": {
-            "type": "object",
-            "description": "Page of All Products",
-            "properties": {
-              "count": {
-                "type":"integer",
-                "example":"2"},
-              "next":{
-                "type":"string",
-                "example":"null"},
-              "previous": {
-                "type":"string",
-                "example":"null"},
-              "results": {
-                "type": "array",
-                "items": {"$ref": "#components/schemas/QuerySetsProducts"}
-              }         
-            }
-          }
-        }
-      }
-    }                             
+    }               
   },
 
   "requestBodies": {
@@ -90,15 +64,76 @@
         }
       }
     },
-    "IdProductRequestBody": {
+    "RegisterRequestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "username": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "first_name": {
+                "type": "User"
+              }
+            }
+          },
+          "examples": {
+            "test@user.com": {
+              "summary": "An example of a user",
+              "value": {
+                "username": "user",
+                "password": "user",
+                "email":"user@user.user",
+                "first_name": "User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "UpdateUserRequestBody": {
       "content": {
         "multipart/form-data": {
           "schema": {
             "type": "object",
             "properties": {
-              "id_product": {
-                "type": "integer",
-                "example": 1
+              "username": {
+                "type": "string",
+                "example": ""
+              },
+              "password": {
+                "type": "string",
+                "example": ""
+              },
+              "first_name": {
+                "type": "string",
+                "example": ""
+              },
+              "email": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "ResetPasswordRequestBody": {
+      "content": {
+        "multipart/form-data": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "password": {
+                "type": "string",
+                "example": ""
               }
             }
           }
@@ -130,10 +165,6 @@
         "status"
       ],
       "properties": {
-        "id": {
-          "type": "integer",
-          "example": "123"
-        },
         "email": {
           "type": "string",
           "example": "test@user.com"
@@ -149,7 +180,16 @@
         "status": {
           "type": "string",
           "example": "active"
+        },
+        "role": {
+          "type": "string",
+          "example": "user"
+        },
+        "id": {
+          "type": "integer",
+          "example": "123"
         }
+        
       }
     },
 
