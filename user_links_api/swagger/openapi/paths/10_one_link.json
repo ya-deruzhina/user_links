@@ -1,13 +1,13 @@
 {
-    "/api/v1/collection/{collection_id}/": {
+    "/api/v1/link/{link_id}/": {
         "get": {
-            "description": "Show one Collection",
+            "description": "Show one Link",
             "tags": [
-                "Collections"
+                "Links"
             ],
             "parameters": [
                 {
-                  "name": "collection_id",
+                  "name": "link_id",
                   "in": "path",
                   "description": "Id",
                   "schema": {
@@ -17,15 +17,15 @@
               ],
             "responses": {
                 "200": {
-                    "description": "Page of one Collection",
+                    "description": "Page of one Link",
                     "content": {
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "description": "Page of one Collection",
+                                "description": "Page of one Link",
                                 "properties": {
                                         "type": "array",
-                                        "results": {"$ref": "#components/schemas/Collection"}
+                                        "results": {"$ref": "#components/schemas/Link"}
                                     }
                                 }
                             }
@@ -55,13 +55,13 @@
             }
         },
         "patch": {
-            "description": "Update one Collection",
+            "description": "Update one Link",
             "tags": [
-                "Collections"
+                "Links"
             ],
             "parameters": [
                 {
-                  "name": "collection_id",
+                  "name": "link_id",
                   "in": "path",
                   "description": "Id",
                   "schema": {
@@ -70,19 +70,19 @@
                 }
               ],
             "requestBody": {
-                "$ref": "#/components/requestBodies/CollectionUpdateRequestBody"
+                "$ref": "#/components/requestBodies/LinkUpdateRequestBody"
             },
             "responses": {
                 "200": {
-                    "description": "Page of one Collection",
+                    "description": "Page of one Link",
                     "content": {
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "description": "Page of one Collection",
+                                "description": "Page of one Link",
                                 "properties": {
                                         "type": "array",
-                                        "results": {"$ref": "#components/schemas/Collection"}
+                                        "results": {"$ref": "#components/schemas/Link"}
                                     }
                                 }
                             }
@@ -111,13 +111,13 @@
             }
         },
         "delete": {
-            "description": "Delete one Collection",
+            "description": "Delete one Link",
             "tags": [
-                "Collections"
+                "Links"
             ],
             "parameters": [
                 {
-                  "name": "collection_id",
+                  "name": "link_id",
                   "in": "path",
                   "description": "Id",
                   "schema": {

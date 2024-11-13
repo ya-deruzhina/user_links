@@ -22,6 +22,10 @@
       {
         "name": "Collections",
         "description": "Collections related endpoints"
+      },
+      {
+        "name": "Links",
+        "description": "Links related endpoints"
       }
     ],
 

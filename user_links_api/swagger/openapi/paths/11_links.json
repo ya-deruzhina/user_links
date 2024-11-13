@@ -1,0 +1,16 @@
+{
+    "/api/v1/links/list/": {
+        "get": {
+            "description": "Show all Links by user",
+            "tags": [
+                "Links"
+            ],
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/Links"
+                }
+            }
+        }
+    }
+
+}

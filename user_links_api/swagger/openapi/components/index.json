@@ -60,7 +60,33 @@
           }
         }
       }
-    }            
+    },
+    "Links":{
+      "description": "Page of All Links",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "description": "Page of All Links",
+            "properties": {
+              "count": {
+                "type":"integer",
+                "example":"2"},
+              "next":{
+                "type":"string",
+                "example":"null"},
+              "previous": {
+                "type":"string",
+                "example":"null"},
+              "results": {
+                "type": "array",
+                "items": {"$ref": "#components/schemas/QuerySetsLinks"}
+              }         
+            }
+          }
+        }
+      }
+    }                   
 
   },
 
@@ -208,6 +234,44 @@
           }
         }
       }
+    },
+    "LinkRequestBody": {
+      "content": {
+        "multipart/form-data": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "example": "https://google.com/"
+              }
+            }
+          }
+        }
+      }
+    },
+    "LinkUpdateRequestBody": {
+      "content": {
+        "multipart/form-data": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "example": ""
+              },
+              "description": {
+                "type": "string",
+                "example": ""
+              },
+              "kind_link": {
+                "type": "string",
+                "enum": ["WEBSITE","BOOK","ARTICLE","MUSIC","VIDEO"]
+              }
+            }
+          }
+        }
+      }
     }
   },
 
@@ -306,6 +370,61 @@
           "type": "string",
           "example": "User"
         }        
+      }
+    },
+
+    "QuerySetsLinks": {
+      "anyOf":[
+        {
+          "type": "array",
+          "$ref": "#components/schemas/Link"
+          },
+        {
+          "type": "array",
+          "$ref": "#components/schemas/Link"
+        }
+      ]
+    },
+
+    "Link": {
+      "description": "Link model",
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": "1"
+        },
+        "title": {
+          "type": "string",
+          "example": "New"
+        },
+        "description": {
+          "type": "string",
+          "example": "Very Interesting"
+        },
+        "url_page": {
+          "type": "string",
+          "example": "https://www.google.com/"
+        },
+        "kind_link": {
+          "type": "string",
+          "example": "WEBSITE"
+        },
+        "created_at": {
+          "type": "string",
+          "example": "11-11-2024 12:00"
+        },
+        "updated_at": {
+          "type": "string",
+          "example": "11-11-2024 12:00"
+        },
+        "owner": {
+          "type": "integer",
+          "example": "1"
+        }     
       }
     }
   },

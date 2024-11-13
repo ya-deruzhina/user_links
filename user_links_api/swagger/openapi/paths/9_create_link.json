@@ -1,0 +1,49 @@
+{
+    "/api/v1/link/create/": {
+        "post": {
+            "description": "Create one Link",
+            "tags": [
+                "Links"
+            ],
+            "requestBody": {
+                "$ref": "#/components/requestBodies/LinkRequestBody"
+            },
+            "responses": {
+                "200": {
+                    "description": "Create one Collection",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "description": "Create one Collection",
+                                "properties": {
+                                        "type": "array",
+                                        "results": {"$ref": "#components/schemas/Link"}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                "400": {
+                    "description": "Returned when request body is not valid",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "errors": {
+                                        "type": "object",
+                                        "example": {
+                                            "password": [
+                                                "This field may not be blank."
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

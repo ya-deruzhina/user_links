@@ -1,5 +1,5 @@
-from apps.collections.models import CollectionModel
-from apps.collections.serializers import CollectionSerializer,CollectionUpdateSerializer
+from ..models import LinksModel
+from ..serializers import LinksSerializer,LinksUpdateSerializer
 
 from core import IsActive
 from rest_framework.views import APIView
@@ -8,13 +8,13 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-class CollectionView(APIView):
+class LinkView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get (self,request,collection_id):
+    def get (self,request,link_id):
         try:
-            collection = CollectionModel.objects.get(id=collection_id)
-            serializer = CollectionSerializer(instance=collection)
+            link_data = LinksModel.objects.get(id=link_id)
+            serializer = LinksSerializer(instance=link_data)
 
         except:
             return Response({'Error':"not found"})
@@ -23,11 +23,11 @@ class CollectionView(APIView):
             return Response ({"results":serializer.data})
         
         
-    def patch (self,request,collection_id):
+    def patch (self,request,link_id):
         try:
             data = request.POST
-            instance = CollectionModel.objects.get(pk = collection_id)
-            serializer = CollectionUpdateSerializer (data=data,instance=instance)
+            instance = LinksModel.objects.get(pk=link_id)
+            serializer = LinksUpdateSerializer (data=data,instance=instance)
             serializer.is_valid(raise_exception=True)
         
         except:
@@ -35,13 +35,13 @@ class CollectionView(APIView):
         
         else:
             serializer.save()
-            collection = CollectionModel.objects.get(id=collection_id)
-            serializer = CollectionSerializer(instance=collection)
+            collection = LinksModel.objects.get(id=link_id)
+            serializer = LinksSerializer(instance=collection)
             return Response ({"results":serializer.data})
         
-    def delete(self,request,collection_id):
+    def delete(self,request,link_id):
         try:
-            collection = CollectionModel.objects.get(id=collection_id)
+            collection = LinksModel.objects.get(id=link_id)
     
         except:
             return Response({'Error':"not found"})

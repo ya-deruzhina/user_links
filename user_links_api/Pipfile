@@ -17,6 +17,7 @@ loguru = "*"
 gunicorn = "*"
 drf-spectacular = "*"
 requests="*"
+parsel = "*"
 
 [dev-packages]
 pre-commit = "*"

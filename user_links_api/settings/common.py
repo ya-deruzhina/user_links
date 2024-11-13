@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Project apps
     'apps.users',
     'apps.collections',
+    'apps.links',
     'user_links_api',
 ]
 
@@ -215,3 +216,5 @@ LOGURU_FORMAT = (
     "<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>\n"
 )
 
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
