@@ -1,14 +1,14 @@
-# Shtutgart Centre project
+# user_links
 
 # Project consists from some parts:
 
 ## postgreSQL (it's about configurations of Docker for PostgreSQL)
-## shtutgart_api (it's a Django REST API)
+## user_links_api (it's a Django REST API)
 
 # For install
 ## 1. Clone the repository
-## Uncomment necessary settings in shtutgart_api/.env and Read shtutgart_api/README.md  
-## 2. Use command 'docker-compose up --build' in folder 'shtutgart_centre'
+## Uncomment necessary settings in user_links_api/.env and Read user_links_api/README.md  
+## 2. Use command 'docker-compose up --build' in folder 'user_links'
 
 # If you use PostgreSQL or Redis, use command line in terminal
 1. sudo /etc/init.d/postgresql stop

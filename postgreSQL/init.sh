@@ -3,6 +3,6 @@
 set -e
 
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
-    CREATE DATABASE shtutgart WITH OWNER postgres;
-    GRANT ALL PRIVILEGES ON DATABASE shtutgart TO postgres;
+    CREATE DATABASE links WITH OWNER postgres;
+    GRANT ALL PRIVILEGES ON DATABASE links TO postgres;
 EOSQL
