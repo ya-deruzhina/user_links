@@ -1,4 +1,4 @@
-# Django REST API Shtutgart Centre
+# Django REST API User Links
 
 # !!! After installing in Docker use next command in Docker Container
 1. pipenv run python manage.py makemigrations
@@ -21,7 +21,7 @@
 4. Activate pipenv environment (if needed) `pipenv shell`
 5. Run migrations via `pipenv run migrate`
 6. Run seeds `pipenv run seed all`
-7. Run API (FastAPI) server by typing `pipenv run server`
+7. Run API server by typing `pipenv run server`
 The Swagger docs will be accessible on the `/doc` endpoint
 
 

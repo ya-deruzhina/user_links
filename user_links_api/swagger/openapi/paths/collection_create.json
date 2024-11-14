@@ -1,0 +1,25 @@
+{
+    "/api/v1/collections/create/": {
+        "post": {
+            "description": "Create one Collection",
+            "tags": [
+                "Collections"
+            ],
+            "requestBody": {
+                "$ref": "#/components/requestBodies/CollectionRequestBody"
+            },
+            "responses": {
+                "200": {
+                    "$ref": "#components/responses/Collection"
+                },
+                "401": {
+                    "$ref": "#components/responses/NotAuthorizated"
+                },
+                "404": {
+                    "$ref": "#components/responses/InvalidData"
+                }
+            }
+        }
+    }
+
+}

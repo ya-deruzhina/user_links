@@ -1,0 +1,103 @@
+{
+    "/api/v1/collections/{collection_id}/": {
+        "get": {
+            "description": "Show one Collection",
+            "tags": [
+                "Collections"
+            ],
+            "parameters": [
+                {
+                  "name": "collection_id",
+                  "in": "path",
+                  "description": "Id",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+            "responses": {
+                "200": {
+                    "$ref": "#components/responses/Collection"
+                },
+                "401": {
+                    "$ref": "#components/responses/NotAuthorizated"
+                },
+                "404": {
+                    "$ref": "#components/responses/InvalidData"
+                }
+
+            }
+        },
+        "patch": {
+            "description": "Update one Collection",
+            "tags": [
+                "Collections"
+            ],
+            "parameters": [
+                {
+                  "name": "collection_id",
+                  "in": "path",
+                  "description": "Id",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+            "requestBody": {
+                "$ref": "#/components/requestBodies/CollectionUpdateRequestBody"
+            },
+            "responses": {
+                "200": {
+                    "$ref": "#components/responses/Collection"
+                },
+                "401": {
+                    "$ref": "#components/responses/NotAuthorizated"
+                },
+                "404": {
+                    "$ref": "#components/responses/InvalidData"
+                }
+            }
+        },
+
+
+        "delete": {
+            "description": "Delete one Collection",
+            "tags": [
+                "Collections"
+            ],
+            "parameters": [
+                {
+                  "name": "collection_id",
+                  "in": "path",
+                  "description": "Id",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+            "responses": {
+                "200": {
+                    "description": "Returned after sending valid data",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Status": {
+                                        "type":"string",
+                                        "example":"Deleted"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "#components/responses/NotAuthorizated"
+                },
+                "404": {
+                    "$ref": "#components/responses/InvalidData"
+                }
+            }
+        }
+    }
+}

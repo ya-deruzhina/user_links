@@ -1,22 +1,21 @@
-from apps.collections.models import CollectionModel
-from apps.collections.serializers import CollectionSerializer,CollectionUpdateSerializer
+from ..models import CollectionModel
+from ..serializers import CollectionSerializer,CollectionUpdateSerializer
 
 from apps.links.models import LinksModel
 from apps.links.serializers import LinksSerializer
 
-from core import IsActive
 from rest_framework.views import APIView
-
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.status import HTTP_404_NOT_FOUND
+
 
 class CollectionView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get (self,request,collection_id):
         try:
-            collection = CollectionModel.objects.get(id=collection_id)
+            collection = CollectionModel.objects.get(id=collection_id, owner = request.user.id)
             serializer = CollectionSerializer(instance=collection)
 
             links_inside = LinksModel.objects.filter(collection__id=collection_id)
@@ -26,7 +25,8 @@ class CollectionView(APIView):
                 links.append(links_data)
 
         except:
-            return Response({'Error':"not found"})
+            status = HTTP_404_NOT_FOUND
+            return Response({'Status':"Sent Invalid Data"},status=status)
         
         else:
             result = serializer.data
@@ -37,25 +37,27 @@ class CollectionView(APIView):
     def patch (self,request,collection_id):
         try:
             data = request.POST
-            instance = CollectionModel.objects.get(pk = collection_id)
+            instance = CollectionModel.objects.get(pk = collection_id, owner = request.user.id)
             serializer = CollectionUpdateSerializer (data=data,instance=instance)
             serializer.is_valid(raise_exception=True)
         
         except:
-            return Response({'Error':"not found"})
+            status = HTTP_404_NOT_FOUND
+            return Response({'Status':"Sent Invalid Data"},status=status)
         
         else:
             serializer.save()
             collection = CollectionModel.objects.get(id=collection_id)
             serializer = CollectionSerializer(instance=collection)
-            return Response ({"results":serializer.data})
+            return Response (serializer.data)
         
     def delete(self,request,collection_id):
         try:
-            collection = CollectionModel.objects.get(id=collection_id)
+            collection = CollectionModel.objects.get(id=collection_id, owner = request.user.id)
     
         except:
-            return Response({'Error':"not found"})
+            status = HTTP_404_NOT_FOUND
+            return Response({'Status':'Sent Invalid Data'},status=status)
         
         else:
             collection.delete()

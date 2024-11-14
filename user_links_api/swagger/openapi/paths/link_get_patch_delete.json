@@ -1,0 +1,104 @@
+{
+    "/api/v1/links/{link_id}/": {
+        "get": {
+            "description": "Show one Link",
+            "tags": [
+                "Links"
+            ],
+            "parameters": [
+                {
+                  "name": "link_id",
+                  "in": "path",
+                  "description": "Id",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/Link"
+                },
+                "401": {
+                    "$ref": "#components/responses/NotAuthorizated"
+                },
+                "404": {
+                    "$ref": "#components/responses/InvalidData"
+                }
+
+            }
+        },
+        "patch": {
+            "description": "Update one Link",
+            "tags": [
+                "Links"
+            ],
+            "parameters": [
+                {
+                  "name": "link_id",
+                  "in": "path",
+                  "description": "Id",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+            "requestBody": {
+                "$ref": "#/components/requestBodies/LinkUpdateRequestBody"
+            },
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/Link"
+                },
+                "401": {
+                    "$ref": "#components/responses/NotAuthorizated"
+                },
+                "404": {
+                    "$ref": "#components/responses/InvalidData"
+                }
+
+            }
+        },
+        "delete": {
+            "description": "Delete one Link",
+            "tags": [
+                "Links"
+            ],
+            "parameters": [
+                {
+                  "name": "link_id",
+                  "in": "path",
+                  "description": "Id",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+            "responses": {
+                "200": {
+                    "description": "Returned after sending valid id",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Status": {
+                                        "type":"string",
+                                        "example":"Deleted"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "#components/responses/NotAuthorizated"
+                },
+
+                "404": {
+                    "$ref": "#components/responses/InvalidData"
+                }
+
+            }
+        }
+    }
+}

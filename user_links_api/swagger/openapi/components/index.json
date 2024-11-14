@@ -66,6 +66,48 @@
       }
     },
 
+    "Collection":{
+      "description": "Page of One Collection",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "description": "Page of One Collection",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "1"
+              },
+              "name": {
+                "type": "string",
+                "example": "New"
+              },
+              "description": {
+                "type": "string",
+                "example": "Very Interesting"
+              },
+              "created_at": {
+                "type": "string",
+                "example": "2024-11-14T23:10:45.126975+03:00"
+              },
+              "updated_at": {
+                "type": "string",
+                "example": "2024-11-14T23:10:45.126975+03:00"
+              },
+              "owner": {
+                "type": "string",
+                "example": "1"
+              },
+              "links": {
+                "type": "array",
+                "items": {"$ref": "#components/schemas/QuerySetsLinks"}
+              }        
+            }
+          }
+        }
+      }
+    },
+
     "Links":{
       "description": "Page of All Links",
       "content": {
@@ -91,7 +133,90 @@
           }
         }
       }
-    }  
+    },
+
+    "Link": {
+      "description": "Link model",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "description": "Page of One Link",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "1"
+              },
+              "title": {
+                "type": "string",
+                "example": "New"
+              },
+              "description": {
+                "type": "string",
+                "example": "Very Interesting"
+              },
+              "url_page": {
+                "type": "string",
+                "example": "https://www.google.com/"
+              },
+              "kind_link": {
+                "type": "string",
+                "example": "WEBSITE"
+              },
+              "created_at": {
+                "type": "string",
+                "example": "2024-11-14T23:10:45.126975+03:00"
+              },
+              "updated_at": {
+                "type": "string",
+                "example": "2024-11-14T23:10:45.126975+03:00"
+              },
+              "owner": {
+                "type": "integer",
+                "example": "1"
+              },
+              "collection":{
+                  "type": "list",
+                  "example":[1,2,3]
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "NotAuthorizated":{
+      "description": "Returned When User is not Authorizated",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "description": "View Without Authorization",
+            "properties": {
+              "detail": {
+                "type":"string",
+                "example":"Authentication credentials were not provided."
+              }
+            }
+          }
+        }
+      }
+    },
+    "InvalidData":{
+      "description": "Returned after sending invalid data",
+      "content": {
+        "application/json": {
+          "schema": {
+            "properties": {
+              "Status": {
+                "type":"string",
+                "example":"Sent Invalid Data"
+              }
+            }
+          }
+        }
+      }
+    }
 
   },
 
@@ -201,13 +326,9 @@
                 "type": "string",
                 "example": "First"
               },
-              "short_description": {
+              "description": {
                 "type": "string",
                 "example": "Very Interesting"
-              },
-              "owner": {
-                "type": "integer",
-                "example": "1"
               }
             }
           }
@@ -225,7 +346,7 @@
                 "type": "string",
                 "example": ""
               },
-              "short_description": {
+              "description": {
                 "type": "string",
                 "example": ""
               }
@@ -245,7 +366,7 @@
                 "type": "string",
                 "example": "https://education.yandex.ru/journal/kak-napisat-krasivyy-kod"
               },
-              "collection": {
+              "collection_add": {
                 "type": "integer",
                 "enum": [1,2,3,4]
               }
@@ -273,7 +394,11 @@
                 "type": "string",
                 "enum": ["WEBSITE","BOOK","ARTICLE","MUSIC","VIDEO"]
               },
-              "collection": {
+              "collection_add": {
+                "type": "integer",
+                "enum": [1,2,3,4]
+              },
+              "collection_remove": {
                 "type": "integer",
                 "enum": [1,2,3,4]
               }
@@ -357,17 +482,17 @@
           "type": "string",
           "example": "New"
         },
-        "short_description": {
+        "description": {
           "type": "string",
           "example": "Very Interesting"
         },
         "created_at": {
           "type": "string",
-          "example": "11-11-2024 12:00"
+          "example": "2024-11-14T23:10:45.126975+03:00"
         },
         "updated_at": {
           "type": "string",
-          "example": "11-11-2024 12:00"
+          "example": "2024-11-14T23:10:45.126975+03:00"
         },
         "owner": {
           "type": "string",
@@ -418,20 +543,20 @@
         },
         "created_at": {
           "type": "string",
-          "example": "11-11-2024 12:00"
+          "example": "2024-11-14T23:10:45.126975+03:00"
         },
         "updated_at": {
           "type": "string",
-          "example": "11-11-2024 12:00"
+          "example": "2024-11-14T23:10:45.126975+03:00"
         },
         "owner": {
           "type": "integer",
           "example": "1"
         },
         "collection":{
-            "type": "array",
-            "items": {"example":[1,2,3]}
-        }     
+          "type": "list",
+          "example":[1,2,3]
+      }   
       }
     },
 

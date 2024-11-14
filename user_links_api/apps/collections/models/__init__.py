@@ -1,4 +1,4 @@
-from .collection import CollectionModel
+from .collection_model import CollectionModel
 
 
 __all__ = (

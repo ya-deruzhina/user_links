@@ -1,29 +1,12 @@
-from rest_framework.response import Response
-
 from ..models import User
-from ..serializers import UserSerializer
+from ..serializers import UserSerializer, UserUpdateSerializer
 
+from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-
-from rest_framework.status import HTTP_401_UNAUTHORIZED
-
-from ..models import User
-from ..serializers import UserUpdateSerializer
-
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_401_UNAUTHORIZED,HTTP_403_FORBIDDEN
 from django.contrib.auth.hashers import make_password
 
-# class CsrfExemptSessionAuthentication(SessionAuthentication):
-
-#     def enforce_csrf(self, request):
-#         return  # To not perform the csrf check previously happening
-
-# Transit Update
 
 class UserView(APIView):
     permission_classes = [IsAuthenticated]

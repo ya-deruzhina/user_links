@@ -1,10 +1,9 @@
-from apps.collections.models import CollectionModel
-from apps.collections.serializers import CollectionSerializer
-
-from core import IsActive
+from ..models import CollectionModel
+from ..serializers import CollectionSerializer
 
 from rest_framework import generics
 from rest_framework import pagination
+from rest_framework.permissions import IsAuthenticated
 
 class DefaultPagination(pagination.PageNumberPagination):
     page_size = 10
@@ -12,7 +11,7 @@ class DefaultPagination(pagination.PageNumberPagination):
     max_page_size = 20
 
 class CollectionsView(generics.ListAPIView):
-    permission_classes = (IsActive,)
+    permission_classes = [IsAuthenticated]
     serializer_class = CollectionSerializer
     pagination_class = DefaultPagination
 

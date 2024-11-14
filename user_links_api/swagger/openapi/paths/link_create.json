@@ -1,0 +1,39 @@
+{
+    "/api/v1/links/create/": {
+        "post": {
+            "description": "Create one Link",
+            "tags": [
+                "Links"
+            ],
+            "requestBody": {
+                "$ref": "#/components/requestBodies/LinkRequestBody"
+            },
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/Link"
+                },
+                "400": {
+                    "description": "Returned after sending valid data",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Status": {
+                                        "type":"string",
+                                        "example":"Link Already Used"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "#components/responses/NotAuthorizated"
+                },
+                "404": {
+                    "$ref": "#components/responses/InvalidData"
+                }
+            }
+        }
+    }
+}

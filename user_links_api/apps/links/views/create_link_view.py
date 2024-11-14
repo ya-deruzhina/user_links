@@ -7,7 +7,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 import requests, re
-from .parser import xpath
+from .parser_view import xpath
+from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_400_BAD_REQUEST
 
             # form = ImageForm(request.POST, request.FILES)
   
@@ -53,7 +54,6 @@ class LinkCreateView(APIView):
                 image = f'http://{url_site}{image}'
 
             kind_link = xpath(page, '//meta[@property="og:type"]//@content').extract_first()
-            print(kind_link)
             
             if kind_link:
                 kind_link = kind_link.upper()
@@ -72,15 +72,21 @@ class LinkCreateView(APIView):
                 'url_page':url_page,
                 'image':image,
                 'kind_link':kind_link,
-                'owner':owner
+                'owner':owner,
             }
             if len(LinksModel.objects.filter(url_page=url_page).filter(owner=owner))>0:
-                return Response ({"Link":"Already Used"})
+                status = HTTP_400_BAD_REQUEST
+                return Response ({"Status":"Link Already Used"},status=status)
+
+            if request.POST['collection'] != '':
+                data['collection'] = [request.POST['collection']]
+
             serializer = LinksSerializer(data=data)
             serializer.is_valid(raise_exception=True)
 
         except:
-            return Response ({"NO":"data"})
+            status = HTTP_404_NOT_FOUND
+            return Response({'Status':"Sent Invalid Data"},status=status)
 
         else:
             serializer.save()

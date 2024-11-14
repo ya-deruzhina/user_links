@@ -1,6 +1,6 @@
-from .view_links import LinksView
-from .one_link import LinkView
-from .create_link import LinkCreateView
+from .links_view import LinksView
+from .one_link_view import LinkView
+from .create_link_view import LinkCreateView
 
 
 __all__ = (

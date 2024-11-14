@@ -10,21 +10,7 @@
                     "$ref": "#/components/responses/Collections"
                 },
                 "401": {
-                    "description": "Returned When Used is not Authorizated",
-                    "content": {
-                        "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "description": "View Without Authorization",
-                            "properties": {
-                            "detail": {
-                                "type":"string",
-                                "example":"Authentication credentials were not provided."
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    "$ref": "#components/responses/NotAuthorizated"
                 }
             }
         }

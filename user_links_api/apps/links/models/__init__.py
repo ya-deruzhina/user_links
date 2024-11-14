@@ -1,4 +1,4 @@
-from .links import LinksModel
+from .links_model import LinksModel
 
 
 __all__ = (

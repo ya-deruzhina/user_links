@@ -5,6 +5,7 @@ from core import IsActive
 
 from rest_framework import generics
 from rest_framework import pagination
+from rest_framework.permissions import IsAuthenticated
 
 class DefaultPagination(pagination.PageNumberPagination):
     page_size = 10
@@ -12,7 +13,7 @@ class DefaultPagination(pagination.PageNumberPagination):
     max_page_size = 20
 
 class LinksView(generics.ListAPIView):
-    permission_classes = (IsActive,)
+    permission_classes = [IsAuthenticated]
     serializer_class = LinksSerializer
     pagination_class = DefaultPagination
 
