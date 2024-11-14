@@ -1,5 +1,5 @@
 {
-    "/api/v1/collection/{collection_id}/": {
+    "/api/v1/collections/{collection_id}/": {
         "get": {
             "description": "Show one Collection",
             "tags": [

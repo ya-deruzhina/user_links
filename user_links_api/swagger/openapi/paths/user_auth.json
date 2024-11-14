@@ -1,12 +1,12 @@
 {
-    "/api/v1/users/registration/": {
+    "/api/v1/users/sign_in/": {
         "post": {
-            "description": "Registration users accounts",
+            "description": "Allows users to get into their accounts",
             "tags": [
-                "User"
+                "Users"
             ],
             "requestBody": {
-                "$ref": "#/components/requestBodies/RegisterRequestBody"
+                "$ref": "#/components/requestBodies/AuthRequestBody"
             },
             "responses": {
                 "200": {
@@ -22,7 +22,7 @@
                                         "type": "object",
                                         "example": {
                                             "password": [
-                                                "This field may not be blank."
+                                                "This field is required."
                                             ]
                                         }
                                     }

@@ -1,6 +1,9 @@
 from apps.collections.models import CollectionModel
 from apps.collections.serializers import CollectionSerializer,CollectionUpdateSerializer
 
+from apps.links.models import LinksModel
+from apps.links.serializers import LinksSerializer
+
 from core import IsActive
 from rest_framework.views import APIView
 
@@ -16,11 +19,19 @@ class CollectionView(APIView):
             collection = CollectionModel.objects.get(id=collection_id)
             serializer = CollectionSerializer(instance=collection)
 
+            links_inside = LinksModel.objects.filter(collection__id=collection_id)
+            links = []
+            for link in links_inside:
+                links_data = LinksSerializer(instance=link).data
+                links.append(links_data)
+
         except:
             return Response({'Error':"not found"})
         
         else:
-            return Response ({"results":serializer.data})
+            result = serializer.data
+            result['links'] = links
+            return Response (result)
         
         
     def patch (self,request,collection_id):

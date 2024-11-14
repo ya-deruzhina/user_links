@@ -16,8 +16,8 @@
 
     "tags": [
       {
-        "name": "User",
-        "description": "User related endpoints"
+        "name": "Users",
+        "description": "Users related endpoints"
       },
       {
         "name": "Collections",

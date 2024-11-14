@@ -1,5 +1,6 @@
 from django.db import models
 from apps.users.models import User
+from apps.collections.models import CollectionModel
 
 class LinksModel (models.Model):
 
@@ -19,10 +20,11 @@ class LinksModel (models.Model):
 
     title = models.CharField(null=False)
     description = models.TextField(null=False)
-    url_page = models.URLField(unique=True, null=False)
+    url_page = models.URLField(null=False)
     #Картинка превью берется из поля og:image.
     # image = models.ImageField(upload_to='images/')
     kind_link = models.CharField (choices=KIND_LINKS, default=WEBSITE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    collection = models.ManyToManyField(CollectionModel,null=True)

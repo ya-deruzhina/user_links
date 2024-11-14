@@ -1,5 +1,6 @@
 {
-  "responses": {    
+  "responses": { 
+
     "UnauthorizedResponse": {
       "description": "Returned after making request with invalid credentials",
       "content": {
@@ -16,6 +17,7 @@
         }
       }
     },
+
     "SuccessfulSignInResponse": {
       "description": "Successful sign in",
       "content": {
@@ -28,13 +30,15 @@
                 "$ref": "#components/schemas/User"
               },
               "token": {
-                "$ref": "#components/schemas/Token"
+                "type":"string",
+                "example":"Bearer <token>"
               }
             }
           }
         }
       }
     },
+
     "Collections":{
       "description": "Page of All Collections",
       "content": {
@@ -61,6 +65,7 @@
         }
       }
     },
+
     "Links":{
       "description": "Page of All Links",
       "content": {
@@ -86,11 +91,12 @@
           }
         }
       }
-    }                   
+    }  
 
   },
 
   "requestBodies": {
+
     "AuthRequestBody": {
       "content": {
         "application/json": {
@@ -106,66 +112,52 @@
             }
           },
           "examples": {
-            "test@user.com": {
+            "user@user.com": {
               "summary": "An example of a user",
               "value": {
-                "identity": "admin",
-                "password": "admin"
+                "identity": "user@user.com",
+                "password": "user"
               }
             }
           }
         }
       }
     },
+
     "RegisterRequestBody": {
       "content": {
         "application/json": {
           "schema": {
             "type": "object",
             "properties": {
-              "username": {
-                "type": "string"
+              "email": {
+              "type": "string"
               },
               "password": {
                 "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "first_name": {
-                "type": "User"
-              }
+              }              
             }
           },
           "examples": {
             "test@user.com": {
               "summary": "An example of a user",
               "value": {
-                "username": "user",
-                "password": "user",
-                "email":"user@user.user",
-                "first_name": "User"
+                "email": "user@user.com",
+                "password": "user"
               }
             }
           }
         }
       }
     },
+
     "UpdateUserRequestBody": {
       "content": {
         "multipart/form-data": {
           "schema": {
             "type": "object",
             "properties": {
-              "username": {
-                "type": "string",
-                "example": ""
-              },
               "password": {
-                "type": "string",
-                "example": ""
-              },
-              "first_name": {
                 "type": "string",
                 "example": ""
               },
@@ -178,12 +170,17 @@
         }
       }
     },
+
     "ResetPasswordRequestBody": {
       "content": {
         "multipart/form-data": {
           "schema": {
             "type": "object",
             "properties": {
+              "email": {
+                "type": "string",
+                "example": "user@user.com"
+              },
               "password": {
                 "type": "string",
                 "example": ""
@@ -193,6 +190,7 @@
         }
       }
     },
+
     "CollectionRequestBody": {
       "content": {
         "multipart/form-data": {
@@ -216,6 +214,7 @@
         }
       }
     },
+
     "CollectionUpdateRequestBody": {
       "content": {
         "multipart/form-data": {
@@ -235,6 +234,7 @@
         }
       }
     },
+
     "LinkRequestBody": {
       "content": {
         "multipart/form-data": {
@@ -243,13 +243,18 @@
             "properties": {
               "url": {
                 "type": "string",
-                "example": "https://google.com/"
+                "example": "https://education.yandex.ru/journal/kak-napisat-krasivyy-kod"
+              },
+              "collection": {
+                "type": "integer",
+                "enum": [1,2,3,4]
               }
             }
           }
         }
       }
     },
+
     "LinkUpdateRequestBody": {
       "content": {
         "multipart/form-data": {
@@ -267,15 +272,21 @@
               "kind_link": {
                 "type": "string",
                 "enum": ["WEBSITE","BOOK","ARTICLE","MUSIC","VIDEO"]
+              },
+              "collection": {
+                "type": "integer",
+                "enum": [1,2,3,4]
               }
             }
           }
         }
       }
     }
+
   },
 
   "schemas": {
+
     "Token": {
       "description": "Token model",
       "type": "object",
@@ -285,7 +296,7 @@
       "properties": {
         "token": {
           "type": "string",
-          "example": "Bearer <token>"
+          "enum": {"token":"Bearer <token>"}
         }
       }
     },
@@ -301,14 +312,6 @@
         "email": {
           "type": "string",
           "example": "test@user.com"
-        },
-        "first_name": {
-          "type": "string",
-          "example": "Jack"
-        },
-        "last_name": {
-          "type": "string",
-          "example": "London"
         },
         "status": {
           "type": "string",
@@ -368,7 +371,7 @@
         },
         "owner": {
           "type": "string",
-          "example": "User"
+          "example": "1"
         }        
       }
     },
@@ -424,10 +427,41 @@
         "owner": {
           "type": "integer",
           "example": "1"
+        },
+        "collection":{
+            "type": "array",
+            "items": {"example":[1,2,3]}
         }     
+      }
+    },
+
+    "LinksCollekction": {
+      "anyOf":[
+        {
+          "type": "array",
+          "$ref": "#components/schemas/CollectionLink"
+          },
+        {
+          "type": "array",
+          "$ref": "#components/schemas/CollectionLink"
+        }
+      ]
+    },
+    "CollectionLink": {
+      "description": "Link model",
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": "1"
+        }
       }
     }
   },
+
   "securitySchemes": {
     "BearerScheme": {
       "type": "http",

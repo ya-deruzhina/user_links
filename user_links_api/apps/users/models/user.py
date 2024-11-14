@@ -30,8 +30,6 @@ class User(AbstractUser):
     USER_STATUSES_CHOICES = tuple(zip(USER_STATUSES, USER_STATUSES_DESCRIPTION))
 
     email = models.EmailField(unique=True, null=True)
-    first_name = models.CharField(max_length=255, blank=True, null=True)
-    last_name = models.CharField(max_length=255, blank=True, null=True)
     status = models.CharField(
         max_length=255, choices=USER_STATUSES_CHOICES, default=ACTIVE
     )
@@ -44,7 +42,7 @@ class User(AbstractUser):
     login_attempts_count = models.SmallIntegerField(default=0)
 
     def __str__(self):
-        return f'{self.id}. {self.username}'
+        return f'{self.id}. {self.email}'
 
     @property
     def app_role(self):

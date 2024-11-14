@@ -1,5 +1,5 @@
 {
-    "/api/v1/link/create/": {
+    "/api/v1/links/create/": {
         "post": {
             "description": "Create one Link",
             "tags": [

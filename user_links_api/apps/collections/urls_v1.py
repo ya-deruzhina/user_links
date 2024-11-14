@@ -4,6 +4,6 @@ from .views import *
 
 urlpatterns = [
     path('collections/list/', CollectionsView.as_view()),
-    path('collection/<int:collection_id>/', CollectionView.as_view()),
-    path('collection/create/', CollectionCreateView.as_view()),
+    path('collections/<int:collection_id>/', CollectionView.as_view()),
+    path('collections/create/', CollectionCreateView.as_view()),
 ]

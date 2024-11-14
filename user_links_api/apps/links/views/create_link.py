@@ -74,6 +74,8 @@ class LinkCreateView(APIView):
                 'kind_link':kind_link,
                 'owner':owner
             }
+            if len(LinksModel.objects.filter(url_page=url_page).filter(owner=owner))>0:
+                return Response ({"Link":"Already Used"})
             serializer = LinksSerializer(data=data)
             serializer.is_valid(raise_exception=True)
 

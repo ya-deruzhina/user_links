@@ -1,0 +1,66 @@
+{
+    "/api/v1/users/registration/": {
+        "post": {
+            "description": "Registration users accounts",
+            "tags": [
+                "Users"
+            ],
+            "requestBody": {
+                "$ref": "#/components/requestBodies/RegisterRequestBody"
+            },
+            "responses": {
+                "200": {
+                    "description": "Returned when request body is valide",
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "description": "Successful register",
+                            "properties": {
+                            "Status": {
+                                "type":"string",
+                                "example":"Successful"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "UnSuccessful register",
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "description": "Registration with Invakid Data",
+                            "properties": {
+                            "Status": {
+                                "type":"string",
+                                "example":"Unsuccessful: Invalid Data"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "403": {
+                    "description": "This email is registered",
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "description": "This email is registered",
+                            "properties": {
+                            "Status": {
+                                "type":"string",
+                                "example":"Unsuccessful: This email is registered"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

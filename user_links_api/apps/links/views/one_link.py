@@ -28,7 +28,12 @@ class LinkView(APIView):
             data = request.POST
             instance = LinksModel.objects.get(pk=link_id)
             serializer = LinksUpdateSerializer (data=data,instance=instance)
+            import pdb; pdb.set_trace()
             serializer.is_valid(raise_exception=True)
+
+
+            if 'collection' in data.keys() and data['collection'] != '':
+                instance.collection.create(owner_id=data['collection'])
         
         except:
             return Response({'Error':"not found"})

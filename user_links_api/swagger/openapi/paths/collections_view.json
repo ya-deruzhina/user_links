@@ -1,0 +1,33 @@
+{
+    "/api/v1/collections/list/": {
+        "get": {
+            "description": "Show all Collections by user",
+            "tags": [
+                "Collections"
+            ],
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/Collections"
+                },
+                "401": {
+                    "description": "Returned When Used is not Authorizated",
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "description": "View Without Authorization",
+                            "properties": {
+                            "detail": {
+                                "type":"string",
+                                "example":"Authentication credentials were not provided."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

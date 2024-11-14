@@ -1,5 +1,5 @@
 {
-    "/api/v1/link/{link_id}/": {
+    "/api/v1/links/{link_id}/": {
         "get": {
             "description": "Show one Link",
             "tags": [
