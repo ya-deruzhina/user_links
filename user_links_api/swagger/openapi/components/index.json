@@ -365,10 +365,6 @@
               "url": {
                 "type": "string",
                 "example": "https://education.yandex.ru/journal/kak-napisat-krasivyy-kod"
-              },
-              "collection_add": {
-                "type": "integer",
-                "enum": [1,2,3,4]
               }
             }
           }

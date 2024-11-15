@@ -1,20 +1,16 @@
 from ..serializers import LinksSerializer
 from ..models import LinksModel
-# from ..forms import ImageForm
+from .parser_view import xpath
 
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-
-import requests, re
-from .parser_view import xpath
 from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_400_BAD_REQUEST
 
-            # form = ImageForm(request.POST, request.FILES)
-  
-        #     # if form.is_valid():
-        # 
-        #         # form.save()
+import requests, re
+
+from django.core.files.base import ContentFile
+
 
 class LinkCreateView(APIView):
     permission_classes = [IsAuthenticated]
@@ -44,9 +40,10 @@ class LinkCreateView(APIView):
             url_site = re.findall(r'\/\/([\d\D]+?\.[\D]{2,3})\/',url_page)[0]
             image = xpath(page, '//meta[@property="og:image"]//@content').extract_first()
             if image == '' or not image:
-                xpath(page, '//head//@image').extract_first()
+                image = xpath(page, '//head//@image').extract_first()
                 if image == '' or not image:
                     image = xpath(page, '//img//@src').extract_first()
+            
             
             if 'https://' in url_page and 'https://' not in image:
                 image = f'https://{url_site}{image}'
@@ -65,7 +62,12 @@ class LinkCreateView(APIView):
                 kind_link = 'WEBSITE'
             
             owner = request.user.id
-
+            id_image = int(LinksModel.objects.all().order_by('-id')[0].id)+1
+            type_image = image.split('.')[-1]
+            name_image = f'{id_image}.{type_image}'
+            response = requests.get(image, stream=True)
+            response.raise_for_status()
+            image = ContentFile(response.content, name=name_image)
             data = {
                 'title':title,
                 'description':description,
@@ -74,13 +76,10 @@ class LinkCreateView(APIView):
                 'kind_link':kind_link,
                 'owner':owner,
             }
+
             if len(LinksModel.objects.filter(url_page=url_page).filter(owner=owner))>0:
                 status = HTTP_400_BAD_REQUEST
                 return Response ({"Status":"Link Already Used"},status=status)
-
-            if request.POST['collection'] != '':
-                data['collection'] = [request.POST['collection']]
-
             serializer = LinksSerializer(data=data)
             serializer.is_valid(raise_exception=True)
 

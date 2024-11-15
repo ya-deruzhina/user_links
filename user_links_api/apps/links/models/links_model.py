@@ -21,8 +21,7 @@ class LinksModel (models.Model):
     title = models.CharField(null=False)
     description = models.TextField(null=False)
     url_page = models.URLField(null=False)
-    #Картинка превью берется из поля og:image.
-    # image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/', null=True)
     kind_link = models.CharField (choices=KIND_LINKS, default=WEBSITE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

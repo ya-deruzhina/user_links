@@ -4,15 +4,22 @@ from apps.users.models import User
 from apps.links.services import LinkService
 from faker import Faker
 fake = Faker()
+import random
 
-
+KIND_LINKS = [
+   "WEBSITE",
+   "BOOK",
+   "ARTICLE",
+   "MUSIC",
+   "VIDEO"
+]
 
 def get_links_params(owner):
     return {
-        "title": fake.color(),
+        "title": fake.city(),
         "description":fake.sentence(),
         "url_page":fake.url(),
-        # "kind_link":kind_link,
+        "kind_link":random.choice(KIND_LINKS),
         "owner":owner,
     }
 

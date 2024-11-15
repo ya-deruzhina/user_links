@@ -19,6 +19,7 @@ drf-spectacular = "*"
 requests="*"
 parsel = "*"
 faker = "*"
+Pillow = "*"
 
 [dev-packages]
 pre-commit = "*"
