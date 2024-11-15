@@ -2,7 +2,7 @@ from apps.users.models import User
 from apps.users.services import UsersService
 
 
-def get_admin_params():
+def get_admins_params():
     return {
         "username": "admin",
         "email": "admin@admin.admin",
@@ -16,4 +16,4 @@ def get_admin_params():
 
 def perform(*args, **kwargs):
     if not User.objects.filter(username="admin").exists():
-        UsersService.create(get_admin_params())
+        UsersService.create(get_admins_params())

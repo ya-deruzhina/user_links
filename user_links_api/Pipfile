@@ -18,6 +18,7 @@ gunicorn = "*"
 drf-spectacular = "*"
 requests="*"
 parsel = "*"
+faker = "*"
 
 [dev-packages]
 pre-commit = "*"
