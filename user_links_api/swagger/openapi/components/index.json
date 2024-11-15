@@ -159,6 +159,10 @@
                 "type": "string",
                 "example": "https://www.google.com/"
               },
+              "image":{
+                "type": "string",
+                "example": "/media/images/238.jpg"
+              },
               "kind_link": {
                 "type": "string",
                 "example": "WEBSITE"
@@ -532,6 +536,10 @@
         "url_page": {
           "type": "string",
           "example": "https://www.google.com/"
+        },
+        "image":{
+            "type": "string",
+            "example": "/media/images/238.jpg"
         },
         "kind_link": {
           "type": "string",

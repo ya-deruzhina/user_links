@@ -59,5 +59,6 @@ class LinkView(APIView):
             return Response({'Status':'Sent Invalid Data'},status=status)
         
         else:
+            collection.image.delete(save=True)
             collection.delete()
             return Response({'Status':"Deleted"})
