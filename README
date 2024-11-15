@@ -16,7 +16,7 @@
 2. docker exec -it {{id_container}} pipenv run python manage.py migrate
 3. docker exec -it {{id_container}} pipenv run python manage.py seed all
 
-
+ 
 ## Installing Without Docker
 1. Clone the repository
 2. Install requirements via pipenv `pipenv install`
@@ -53,8 +53,7 @@ Sctipts are one time scripts
 3. Add filename into `script_names` in `scripts/run_seeds.py` or `scripts/run_script.py` file
 
 ### !!! IMPORTANT
-Try to write yout script by using methods `get_or_create` or similar
-to avoid duplication in database
+Try to write yout script by using methods `get_or_create` or similar to avoid duplication in database
 
 #### Provided seeds
 - admin - create admin user. NOTE: Don't forget to change admin password after running.
