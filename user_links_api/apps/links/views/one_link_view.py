@@ -34,12 +34,21 @@ class LinkView(APIView):
 
             if data['collection_add'] != '':
                 collection = CollectionModel.objects.get(id=data['collection_add'])
-                instance.collection.add(collection)
+                if collection.owner.id == request.user.id:
+                    instance.collection.add(collection)
+                    instance.collection.get_or_create(id=data['collection_add'])
+                else:
+                    status = HTTP_404_NOT_FOUND
+                    return Response({'Status':'Sent Invalid Data'},status=status)                    
 
-                instance.collection.get_or_create(id=data['collection_add'])
             if data['collection_remove'] != '':
                 collection = CollectionModel.objects.get(id=data['collection_remove'])
-                instance.collection.remove(collection)
+                if collection.owner.id == request.user.id:
+                    instance.collection.remove(collection)
+                else:
+                    status = HTTP_404_NOT_FOUND
+                    return Response({'Status':'Sent Invalid Data'},status=status)                    
+    
         except:
             status = HTTP_404_NOT_FOUND
             return Response({'Status':'Sent Invalid Data'},status=status)

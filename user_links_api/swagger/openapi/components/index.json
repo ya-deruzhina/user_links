@@ -245,7 +245,7 @@
               "summary": "An example of a user",
               "value": {
                 "identity": "user@user.com",
-                "password": "user"
+                "password": "password"
               }
             }
           }
@@ -396,11 +396,11 @@
               },
               "collection_add": {
                 "type": "integer",
-                "enum": [1,2,3,4]
+                "example": ""
               },
               "collection_remove": {
                 "type": "integer",
-                "enum": [1,2,3,4]
+                "example": ""
               }
             }
           }

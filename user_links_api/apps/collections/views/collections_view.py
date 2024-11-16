@@ -16,4 +16,4 @@ class CollectionsView(generics.ListAPIView):
     pagination_class = DefaultPagination
 
     def get_queryset(self):
-        return CollectionModel.objects.filter(owner=self.request.user.id).order_by('-name')
+        return CollectionModel.objects.filter(owner=self.request.user.id).order_by('name')

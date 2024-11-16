@@ -7,15 +7,13 @@ services:
         environment:
             - POSTGRES_PASSWORD=123456789
             - POSTGRES_USER=postgres
+            - POSTGRES_DB=links
+            - PGDATA=/var/lib/postgresql/data/pgdata
         volumes:
-            - postgres:/code/postgres
-        
-        build: ./postgreSQL
-        
+            - ./pgdata:/var/lib/postgresql/data/pgdata
+        env_file: ./user_links_api/.env
         ports:
             - 5432:5432
-        networks:
-              - djangonetwork
         restart: unless-stopped
 
     web:
@@ -29,12 +27,6 @@ services:
             - 8000:8000
         depends_on:
             - postgres
-        networks:
-              - djangonetwork  
-    
-networks:
-      djangonetwork:
-          driver: bridge
 
 volumes:
     postgres:

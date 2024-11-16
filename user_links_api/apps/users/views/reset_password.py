@@ -25,4 +25,4 @@ class ResetPasswordView(APIView):
     
         else:
             serializer.save()
-            return Response ({'Password':'Reseted'})
+            return Response ({'Status':'Successful'})
