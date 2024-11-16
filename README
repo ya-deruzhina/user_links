@@ -2,13 +2,11 @@
 
 ## Installing
 1. Clone the repository
-2. Fill `.env` file based on `.env.example`
-3. Uncomment necessary settings in user_links_api/.env  
-4. Use command 'docker-compose up --build' in folder '/user_links/'
+2. Fill `.env` file based on `.env.example`  
+3. Use command 'docker-compose up --build' in folder '/user_links/'
 
 ### !!! After installing Use next command in Docker Container
-1. pipenv run python manage.py migrate
-2. pipenv run seed all
+1. pipenv run seed all
 
 ### Or you can use command line in terminal
 1. docker exec -it web pipenv run python manage.py migrate
