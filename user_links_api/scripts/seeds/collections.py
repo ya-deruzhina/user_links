@@ -16,7 +16,6 @@ def get_collections_params(owner):
 
 def perform(*args, **kwargs):
     owner = User.objects.all()
-    if len(CollectionModel.objects.all()) == 0:
-        for i in owner:
-            for number in range(5):
-                CollectionService.create(get_collections_params(i.id))
+    for i in owner:
+        for number in range(5):
+            CollectionService.create(get_collections_params(i.id))

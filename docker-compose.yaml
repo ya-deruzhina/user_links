@@ -3,7 +3,7 @@ version: '3.12'
 services:
     postgres:
         container_name: PostgreSQL
-        image: postgres
+        image: postgres:14.9
         environment:
             - POSTGRES_PASSWORD=123456789
             - POSTGRES_USER=postgres
@@ -21,7 +21,7 @@ services:
         build:  ./user_links_api
         restart: always
         volumes:
-            - postgres:/code/postgres
+            - ./pgdata:/var/lib/postgresql/data/pgdata
         command: bash -c "pipenv run python manage.py migrate && pipenv run python manage.py runserver 0.0.0.0:8000"
         ports:
             - 8000:8000

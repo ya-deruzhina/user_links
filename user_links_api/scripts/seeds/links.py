@@ -27,8 +27,7 @@ def get_links_params(owner):
 def perform(*args, **kwargs):
     owners = User.objects.all()
     owners_id = list(filter(None, [owner.id for owner in owners]))
-    if len(LinksModel.objects.all()) == 0:
-        for n in range(100):
-            user_id = random.choice(owners_id)
-            LinkService.create(get_links_params(user_id))
+    for n in range(100):
+        user_id = random.choice(owners_id)
+        LinkService.create(get_links_params(user_id))
         

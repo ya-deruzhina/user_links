@@ -12,12 +12,16 @@
 1. docker exec -it web pipenv run python manage.py migrate
 2. docker exec -it web pipenv run python manage.py seed all
 
-The Swagger docs will be accessible on the `/doc` endpoint
+#The Swagger docs will be accessible on the `/doc` endpoint
 http://127.0.0.1:8000/doc#/
 
 
 
 ######## SQL 
+# For test SQL script Use next command in Docker Container:
+1. psql -U postgres
+2. \c links
+3. 
 SELECT u.email,
     COUNT(l) AS links_count,
     COUNT(CASE WHEN l.kind_link = 'WEBSITE' THEN 1 END) AS website,
