@@ -25,7 +25,20 @@ class LinkCreateView(APIView):
         'csrftoken': 'g3JhO77QcBIaXDswePm7yf7yFhbxbQg7fyOl7bTUVz46D2Ab32yWXGABCdG9gJWX',
         '_ym_isad': '2',
         '_ym_visorc': 'w',
-        }
+        'ps_l': '1',
+        'ps_n': '1',
+        'mid': 'Zq9BaAAEAAELVEwsoL3EovszmcLZ',
+        'datr': 'Z0GvZr0dT1zjDZEDPpK8xdB3',
+        'ig_did': '4D0A7D2B-2A33-47DA-A941-D99376C803C5',
+        'ig_nrcb': '1',
+        'csrftoken': 't7pHgrErNIBIyi67qsTsIyaaCKzkhTYY',
+        'ds_user_id': '4492254664',
+        'sessionid': '4492254664%3AelPXos7AnVHWvr%3A7%3AAYdJvpRyl1slhHH55kgTawswNof6QWSA5Y1XT418gpk',
+        'wd': '1920x431',
+        'ig_direct_region_hint': '"PRN\\0544492254664\\0541763332619:01f7e56ad77bcc523c3ff6360f5287487231e1be83e028ef4fb749778de23e767518ab2f"',
+        'rur': '"CLN\\0544492254664\\0541763401394:01f7caccc48a7cb92aab35aac80c529f5413c7a675a5767c71975e58bfed6d5f0a13540b"',
+    }
+
 
         headers = {
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0',
@@ -47,8 +60,10 @@ class LinkCreateView(APIView):
 
         try:
             url = request.POST['url']
-            page = requests.get(url,cookies=cookies, headers=headers).content.decode('UTF-8')
-
+            try:
+                page = requests.get(url,cookies=cookies, headers=headers).content.decode('UTF-8')
+            except:
+                page = requests.get(url,cookies=cookies, headers=headers).text
             title = xpath(page, '//meta[@property="og:title"]//@content').extract_first()
             if title == '' or not title:
                 title = xpath(page, '//head/title//text()').extract_first()
@@ -67,14 +82,14 @@ class LinkCreateView(APIView):
                 if url_page ==''or not url_page:
                     url_page = xpath(page,'//head//link[@rel="canonical"]//@href').extract_first()
                     url_page = url
-            
+  
             url_site = re.findall(r'\/\/([\d\D]+?\.[\D]{2,3})\/',url_page)[0]
             image = xpath(page, '//meta[@property="og:image"]//@content').extract_first()
             if image == '' or not image:
                 image = xpath(page, '//head//@image').extract_first()
                 if image == '' or not image:
-                    image = xpath(page, '//img//@src').extract_first()            
-            
+                    image = xpath(page, '//img//@src').extract_first()
+              
             if 'https://' in url_page and 'https://' not in image and 'http://' not in image:
                 image = f'https://{url_site}{image}'
             elif 'http://' in url_page and 'http://' not in image and 'https://' not in image:
@@ -92,9 +107,17 @@ class LinkCreateView(APIView):
                 kind_link = 'WEBSITE'
           
             owner = request.user.id
+            types_image_example = ['bmp', 'dib', 'gif', 'jfif', 'jpe', 'jpg', 'jpeg', 'pbm', 'pgm', 'ppm', 'pnm', 'pfm', 'png', 'apng', 'blp', 
+                           'bufr', 'cur', 'pcx', 'dcx', 'dds', 'ps', 'eps', 'fit', 'fits', 'fli', 'flc', 'ftc', 'ftu', 'gbr', 'grib', 
+                           'h5', 'hdf', 'jp2', 'j2k', 'jpc', 'jpf', 'jpx', 'j2c', 'icns', 'ico', 'im', 'iim', 'mpg', 'mpeg', 'tif', 
+                           'tiff', 'mpo', 'msp', 'palm', 'pcd', 'pdf', 'pxr', 'psd', 'qoi', 'bw', 'rgb', 'rgba', 'sgi', 'ras', 'tga', 
+                           'icb', 'vda', 'vst', 'webp', 'wmf', 'emf', 'xbm', 'xpm']
+            
             if image:
                 id_image = int(LinksModel.objects.all().order_by('-id')[0].id)+1
                 type_image = image.split('.')[-1]
+                if type_image not in types_image_example:
+                    type_image = 'jpg'    
                 name_image = f'{id_image}.{type_image}'
                 response = requests.get(image, stream=True,cookies=cookies, headers=headers)
                 response.raise_for_status()
@@ -108,11 +131,11 @@ class LinkCreateView(APIView):
                 'kind_link':kind_link,
                 'owner':owner,
             }
-
+            
             if len(LinksModel.objects.filter(url_page=url_page).filter(owner=owner))>0:
                 status = HTTP_400_BAD_REQUEST
                 return Response ({"Status":"Link Already Used"},status=status)
-
+            # import pdb; pdb.set_trace()
             serializer = LinksSerializer(data=data)
             serializer.is_valid(raise_exception=True)
 

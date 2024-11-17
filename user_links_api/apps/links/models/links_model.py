@@ -20,7 +20,7 @@ class LinksModel (models.Model):
 
     title = models.CharField(null=False)
     description = models.TextField(null=False)
-    url_page = models.URLField(null=False)
+    url_page = models.URLField(null=False, max_length=500)
     image = models.ImageField(upload_to='images/', null=True)
     kind_link = models.CharField (choices=KIND_LINKS, default=WEBSITE)
     created_at = models.DateTimeField(auto_now_add=True)

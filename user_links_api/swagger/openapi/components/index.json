@@ -244,7 +244,7 @@
             "user@user.com": {
               "summary": "An example of a user",
               "value": {
-                "identity": "user@user.com",
+                "identity": "userka@user.com",
                 "password": "password"
               }
             }

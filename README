@@ -14,3 +14,19 @@
 
 The Swagger docs will be accessible on the `/doc` endpoint
 http://127.0.0.1:8000/doc#/
+
+
+
+######## SQL 
+SELECT u.email,
+    COUNT(l) AS links_count,
+    COUNT(CASE WHEN l.kind_link = 'WEBSITE' THEN 1 END) AS website,
+    COUNT(CASE WHEN l.kind_link = 'BOOK' THEN 1 END) AS book,
+    COUNT(CASE WHEN l.kind_link = 'ARTICLE' THEN 1 END) AS article,
+    COUNT(CASE WHEN l.kind_link = 'MUSIC' THEN 1 END) AS music,
+    COUNT(CASE WHEN l.kind_link = 'VIDEO' THEN 1 END) AS video
+FROM users_user u
+LEFT JOIN links_linksmodel l ON u.id = l.owner_id
+GROUP BY u.email, u.created_at
+ORDER BY links_count DESC, u.created_at ASC
+LIMIT 10;
